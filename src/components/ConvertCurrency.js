@@ -15,21 +15,27 @@ const ConvertCurrency = ({ rates }) => {
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
 
   useEffect(() => {
+    if (!Object.keys(rates).length) return;
+
     if (isUAH(fromCurrency)) {
       amountInFromCurrency
-        ? setToAmount(format(fromAmount / rates[toCurrency]?.rate))
-        : setFromAmount(format(toAmount * rates[toCurrency]?.rate));
+        ? setToAmount(format(fromAmount / rates[toCurrency]))
+        : setFromAmount(format(toAmount * rates[toCurrency]));
     }
     if (isUAH(toCurrency)) {
       amountInFromCurrency
-        ? setToAmount(format(fromAmount * rates[fromCurrency]?.rate))
-        : setFromAmount(format(toAmount / rates[fromCurrency]?.rate));
+        ? setToAmount(format(fromAmount * rates[fromCurrency]))
+        : setFromAmount(format(toAmount / rates[fromCurrency]));
     }
 
     if (!isUAH(toCurrency) && !isUAH(fromCurrency)) {
       amountInFromCurrency
-        ? setToAmount(calcAmount(fromAmount, fromCurrency, toCurrency, rates))
-        : setFromAmount(calcAmount(toAmount, toCurrency, fromCurrency, rates));
+        ? setToAmount(
+            calcAmount(fromAmount, rates[fromCurrency], rates[toCurrency])
+          )
+        : setFromAmount(
+            calcAmount(toAmount, rates[toCurrency], rates[fromCurrency])
+          );
     }
   }, [
     fromCurrency,

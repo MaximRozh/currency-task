@@ -7,11 +7,11 @@ const ConverHeader = ({ rates }) => {
       <div className="box-header">
         <div className="box-header-currency">
           <h3>курс USD</h3>
-          <span>{rates?.USD?.rate}</span>
+          <span>{rates?.USD}</span>
         </div>
         <div className="box-header-currency">
           <h3>курс EUR</h3>
-          <span>{rates?.EUR?.rate}</span>
+          <span>{rates?.EUR}</span>
         </div>
       </div>
     </>

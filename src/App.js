@@ -13,9 +13,10 @@ function App() {
         const res = response.data.filter((item) =>
           options.some((q) => q === item.cc)
         );
-        const data = res.reduce((acc, next) => {
-          return { ...acc, [next.cc]: { ...next } };
-        }, {});
+        const data = res.reduce(
+          (acc, next) => ({ ...acc, [next.cc]: next.rate }),
+          {}
+        );
         setRates(data);
       });
   }, []);

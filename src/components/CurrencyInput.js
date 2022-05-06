@@ -1,4 +1,4 @@
-import "../styles/currencyInput.css";
+import React from "react";
 
 const CurrencyInput = ({
   amount,
